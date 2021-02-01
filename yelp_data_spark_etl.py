@@ -136,6 +136,12 @@ Cache the table for faster future computation
 
 df_review_bus = df_reviews.join(df_business,["business_id"],"left_outer")
 df_reviews_staged = df_review_bus.join(df_users,["user_id"],"left_outer")
+
+df_reviews_staged.repartition(100)\
+                 .write\
+                 .format('parquet')\
+                 .save('/mnt/yelp-staged/reviews_staged_table')
+
 df_reviews_staged.cache()
 
 '''
