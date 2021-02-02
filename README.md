@@ -54,20 +54,57 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 
 #### Fact Table
 
-| ReviewInfo |
-| --- |
-| songplay_id |
-| start_time |
-| user_id |
-| level |
-| song_id |
-| artist_id |
-| session_id |
-| location |
-| user_agent |
-> Records in log data associated with song plays i.e. records with page
+|ReviewInfo|
+
+|Column Name|Data Type|
+|user_id |string |
+|business_id|string|
+|review_cool|long|
+|review_date|timestamp|
+|review_funny|long|
+|review_id|string|
+|review_stars|double|
+|review_text|string|
+|review_useful|long|
+|business_name|string|
+|business_city|string|
+|business_state|string|
+|business_categories|string|
+|business_postal_code|string|
+|business_review_count|integer|
+|business_stars|double|
+|user_average_stars|double|
+|user_compliment_cool|long|
+|user_compliment_cute|long|
+|user_compliment_funny|long|
+|user_compliment_hot|long|
+|user_compliment_list|long|
+|user_compliment_more|long|
+|user_compliment_note|long|
+|user_compliment_photos|long|
+|user_compliment_plain|long|
+|user_compliment_profile|long|
+|user_compliment_writer|long|
+|user_cool|long|
+|user_elite|string|
+|user_fans|long|
+|user_friends|string|
+|user_funny|long|
+|user_name|string|
+|user_review_count|long|
+|user_useful|long|
+|user_yelping_since|timestamp|
+
 
 #### Dimension Tables
+
+|Business|
+|Column Name|Data Type|
+|business_id|string|
+|business_name|string|
+|business_city|string|
+|business_categories|string|
+|business_stars|double|
 
 | users  |
 | --- |
