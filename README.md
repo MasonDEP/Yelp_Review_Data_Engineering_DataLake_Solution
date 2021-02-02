@@ -102,7 +102,7 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 | Business |
 
 | Column Name | Data Type |
-| --- || --- |
+| --- | --- |
 | business_id | string |
 | business_name | string |
 | business_city | string |
@@ -112,7 +112,7 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 | User |
 
 | Column Name | Data Type |
-| --- || --- |
+| --- | --- |
 |user_id|string|
 |user_name|string|
 |user_review_count|long|
