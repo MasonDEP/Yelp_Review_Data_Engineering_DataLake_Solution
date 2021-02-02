@@ -57,6 +57,7 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 | ReviewInfo |
 
 | Column Name | Data Type |
+| --- | --- |
 | user_id | string |
 | business_id | string |
 | review_cool | long |
