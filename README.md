@@ -138,6 +138,9 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 |year|integer|
 |dayofweek|integer|
 
+## Quality Checks
+The code involves 2 data quality checks to see if the dataframe is empty.
+
 ## File Description
 
 `yelp_data_spark_etl.py` : The code is written in the Databricks workspace environment with the premises that all spark configuration is done by "creating cluster" within Databricks. The logic runs the ETL process to model and save fact and dimention tables described obove.
