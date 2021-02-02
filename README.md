@@ -119,52 +119,26 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 |user_average_stars|double|
 |user_yelping_since|timestamp|
 
-| songs   |
-| --- |
-| song_id |
-| title |
-| artist_id |
-| year |
-| duration |
-> Songs in music database
+| Review |
 
-| artists    |
-| --- |
-| artist_id |
-| name |
-| location |
-| lattitude |
-| longitude |
-> Artists in music database
+| Column Name | Data Type |
+| --- | --- |
+|review_id|string|
+|review_text|string|
 
-| time     |
-| --- |
-| start_time |
-| hour |
-| day |
-| week |
-| month |
-| year |
-| weekday |
+| Review Time    |
+
+| Column Name | Data Type |
+| --- | --- |
+|review_date|timestamp|
+|hour|integer|
+|day|integer|
+|week|integer|
+|month|integer|
+|year|integer|
+|dayofweek|integer|
 
 ## File descriptions
 
 `data` folder contains partitioned song and log JSON files.
 
-`sql_queries.py` contains SQL queries that are execued by other files.
-
-`create_tables.py` drops and reinitialises the database environment using queries from `sql_queries.py`.
-
-`etl.py` performs the massive data extraction from JSON files in `data` folder, transforms it into the defined types and tables groups then uploads it to the postgres Database.
-
-`Data_Engineering_Cassandra.py` model the data from `event_datafile_new.csv` by 3 different frequently used queries and store the data into a Apache Cassandra Keyspace.
-
-`event_datafile_new.csv` is an extracted log sample file in csv format.
-
-## Running the ETL pipeline for Postgres DB
-
-1  Ensure the `data` folder and all project files are downloaded and that all dependencies are met. Replace the given connection strings in `create_tables.py` and `etl.py` with your own, pointing to a postgres database server you have set up.Replace the JSON data file location in `etl.py` with your own loacl directory.
-
-2  Run `create_tables.py` to reinitialise the database.
-
-3  Run `etl.py` to start the ETL data pipeline from JSON logs in the `data` folder to the postgres database
