@@ -100,21 +100,24 @@ f9NumwFMBDn751xgFiRbNA,	The Range At Lake Norma,	Cornelius	NC	Active Life, Gun/R
 #### Dimension Tables
 
 | Business |
+
 | Column Name | Data Type |
+| --- || --- |
 | business_id | string |
 | business_name | string |
 | business_city | string |
 | business_categories | string |
 | business_stars | double |
 
-| users  |
-| --- |
-| user_id |
-| first_name |
-| last_name |
-| gender |
-| level |
-> App users 
+| User |
+
+| Column Name | Data Type |
+| --- || --- |
+|user_id|string|
+|user_name|string|
+|user_review_count|long|
+|user_average_stars|double|
+|user_yelping_since|timestamp|
 
 | songs   |
 | --- |
