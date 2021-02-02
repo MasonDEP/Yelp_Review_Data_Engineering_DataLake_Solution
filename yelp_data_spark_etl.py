@@ -4,10 +4,13 @@ from pyspark.sql.functions import *
 access_key = <'ACCESS KEY'>
 secret_key = <'SECRET KEY'>
 encoded_secret_key = secret_key.replace("/", "%2F")
-aws_bucket_name = "yelp-curated"
-mount_name = "yelp-curated"
+aws_bucket_name_curated = "yelp-curated"
+mount_name_curated = "yelp-curated"
+aws_bucket_name_raw = "yelp-raw"
+mount_name_raw = "yelp-raw"
 try:
-  dbutils.fs.mount("s3a://%s:%s@%s" % (access_key, encoded_secret_key, aws_bucket_name), "/mnt/%s" % mount_name)
+  dbutils.fs.mount("s3a://%s:%s@%s" % (access_key, encoded_secret_key, aws_bucket_name_curated), "/mnt/%s" % mount_name_curated)
+  dbutils.fs.mount("s3a://%s:%s@%s" % (access_key, encoded_secret_key, aws_bucket_name_raw), "/mnt/%s" % mount_name_raw)
 except  Exception  as e:
   print('Already Mounted')
   
@@ -32,7 +35,7 @@ reviews_schema = StructType([
 df_reviews = spark.read.format('json')\
                        .option("mode", "DROPMALFORMED")\
                        .schema(reviews_schema)\
-                       .load('/FileStore/tables/sub_data/reviews/*.json')
+                       .load('/mnt/yelp-raw/reviews/*.json')
 
 df_reviews = df_reviews.selectExpr(
                                     "business_id",
@@ -61,7 +64,7 @@ df_business = spark.read.format('csv')\
                        .option("mode", "DROPMALFORMED")\
                        .option('header',True)\
                        .schema(business_schema)\
-                       .load('/FileStore/tables/sub_data/*.csv')
+                       .load('/mnt/yelp-raw/*.csv')
 
 df_business = df_business.selectExpr(
                                     "business_id",
@@ -102,7 +105,7 @@ users_schema = StructType([
 df_users = spark.read.format('json')\
                        .option("mode", "DROPMALFORMED")\
                        .schema(users_schema)\
-                       .load('/FileStore/tables/sub_data/users/*.json')
+                       .load('/mnt/yelp-raw/users/*.json')
 
 df_users = df_users.selectExpr(
                                 "average_stars as user_average_stars",
@@ -130,7 +133,7 @@ df_users = df_users.selectExpr(
                               )
 
 '''
-Join the reviews dataframe, the business dataframe and the user dataframe to form the staged review dataframe.
+Join the reviews dataframe, the business dataframe and the user dataframe to form the review fact table dataframe.
 Cache the table for faster future computation
 '''
 
@@ -140,7 +143,7 @@ df_reviews_staged = df_review_bus.join(df_users,["user_id"],"left_outer")
 df_reviews_staged.repartition(100)\
                  .write\
                  .format('parquet')\
-                 .save('/mnt/yelp-staged/reviews_staged_table')
+                 .save('/mnt/yelp-curated/reviews_fact_table')
 
 df_reviews_staged.cache()
 
